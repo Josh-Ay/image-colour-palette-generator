@@ -107,8 +107,9 @@ function customResultsDiv(resultList, containerElement){
         color.style.background = resultList[i]["color_code"];
         colorCodeHoverParagraph.appendChild(codeTextHover);
 
+        // check if the color has more than 2f's in its hex code i.e a very light color
         if (((codeTextStr.match(/f/g) || []).length) > 2){
-            colorCodeHoverParagraph.style.color = "#000";
+            colorCodeHoverParagraph.style.color = "#000";   // black color
         };
 
         colorCodeCopyParagraph.appendChild(codeTextCopy);
@@ -146,6 +147,8 @@ function customResultsDiv(resultList, containerElement){
             const colorToCopy = this.children[1].innerText;
 
             navigator.clipboard.writeText(colorToCopy);
+
+            // check if the 'colorToCopy' has more than 2f's in its hex code(i.e a very light color) and if so set the color of text within to "black"
             if (((colorToCopy.match(/f/g) || []).length) > 2){
                 customDiv(`Copied ${colorToCopy}`, colorToCopy, container, "#000");
             }else{
