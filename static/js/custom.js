@@ -41,7 +41,7 @@ function customErrorDiv(message, containerElement){
     okBtn.addEventListener("click", function(){errorDiv.remove()})
 };
 
-function customDiv(message, backgroundColor, containerElement){
+function customDiv(message, backgroundColor, containerElement, textColor){
     // create a new div and add a class and the 'color passed' parameter to style it
     const customDiv = document.createElement("div");
     customDiv.className = "color-copied-div";
@@ -59,6 +59,11 @@ function customDiv(message, backgroundColor, containerElement){
 
     // append the h1 to the div created
     customDiv.appendChild(copyMessage);
+
+    if (typeof(textColor) !== "undefined"){
+        customDiv.style.color = textColor;
+    };
+
 
     // insert the div into the document
     document.body.insertBefore(customDiv, containerElement);
@@ -96,10 +101,16 @@ function customResultsDiv(resultList, containerElement){
         let codeText = document.createTextNode(resultList[i]["color_code"]);
         let codeTextHover = document.createTextNode("Copy");
         let codeTextCopy = document.createTextNode(resultList[i]["color_code"]);
+        let codeTextStr = resultList[i]["color_code"];
 
         // appending a div with the background of the color code and the color text to the 'colorDiv' (container)
         color.style.background = resultList[i]["color_code"];
         colorCodeHoverParagraph.appendChild(codeTextHover);
+
+        if (((codeTextStr.match(/f/g) || []).length) > 2){
+            colorCodeHoverParagraph.style.color = "#000";
+        };
+
         colorCodeCopyParagraph.appendChild(codeTextCopy);
         color.appendChild(colorCodeHoverParagraph);
         color.appendChild(colorCodeCopyParagraph);
@@ -122,10 +133,12 @@ function customResultsDiv(resultList, containerElement){
         newFragment.appendChild(resultBox);     // appending the 'resultBox' div to the document fragment
 
         color.addEventListener("mouseover", function(){ // to show the hex text on mouse hover
+            this.style.boxShadow = "10px 0 80px rgba(0, 0, 0, .5)";
             colorCodeHoverParagraph.style.display = "block";
         });
 
         color.addEventListener("mouseleave", function(){    // to hide the hex text on mouse leave
+            this.style.boxShadow = "none";
             colorCodeHoverParagraph.style.display = "none";
         });
 
@@ -133,7 +146,11 @@ function customResultsDiv(resultList, containerElement){
             const colorToCopy = this.children[1].innerText;
 
             navigator.clipboard.writeText(colorToCopy);
-            customDiv(`Copied ${colorToCopy}`, colorToCopy, container);
+            if (((colorToCopy.match(/f/g) || []).length) > 2){
+                customDiv(`Copied ${colorToCopy}`, colorToCopy, container, "#000");
+            }else{
+                customDiv(`Copied ${colorToCopy}`, colorToCopy, container);
+            }
         });
     }
 
