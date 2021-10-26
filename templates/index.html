@@ -9,7 +9,7 @@
         </header>
 
         <div class="add-image-container" ondragover="dragOver(this, event)" ondragleave="dragLeave(this)" ondrop="drop(this, event)">
-            <img onclick="openFiles()" class="upload-icon" src="/static/assets/cloud-icon.svg">
+            <img onclick="openFiles()" class="upload-icon" src="/static/assets/cloud-icon.svg" alt="cloud icon">
             <h2 class="upload-image-text" onclick="openFiles()">Drag and drop to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
             <h2 class="upload-image-text-small" onclick="openFiles()">Click to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
             <label for="upload-img" class="btn browse-btn">
@@ -20,7 +20,7 @@
 
         <div class="loaded-image-preview-container">
             <h2>Image: </h2>
-            <img src="" class="loaded-image-preview">
+            <img src="" class="loaded-image-preview" alt="image uploaded by you">
         </div>
 
         <div class="image-details-container">
@@ -41,7 +41,7 @@
         <div id="loading"></div>
 
         <div class="upload-new-link">
-            <a href="{{ url_for('home') }}" class="btn new-upload-btn">Upload New</a>
+            <a href="{{ url_for('home') }}" class="btn new-upload-btn" aria-label="Upload a new image">Upload New</a>
         </div>
     </div>
 

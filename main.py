@@ -15,13 +15,13 @@ app.secret_key = os.environ.get("SECRET_KEY")
 Bootstrap(app)
 
 
-@app.get("/")
+@app.route("/")
 def home():
 
     return render_template("index.html")
 
 
-@app.post("/")
+@app.route("/", methods=["POST"])
 def display_results():
     uploaded_file = request.files['file']   # getting the uploaded file
     if uploaded_file != "":
