@@ -1,0 +1,287 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/***    Variables to hold colors  ***/
+:root{
+    --blue: #38b6ff;
+    --grey: #D3D3D3;
+    --white: #fff;
+    --black: #000;
+    --grey: #f3f3f3;
+    --backgroundBlur: rgba(0, 0, 0, .5);
+    --textBlurBg: rgba(0, 0, 0, 1);
+}
+
+/******        CONTAINER             *****/
+.container-fluid{
+    height: 100%;
+}
+
+
+/******        HEADER             *****/
+header{
+    background: var(--blue);
+    position: fixed;
+    color: var(--white);
+    box-shadow: 1px 0 15px var(--backgroundBlur);
+    width: 100%;
+    padding: 1% 0;
+    z-index: 3;
+}
+
+header h1{
+    margin: 0;
+}
+
+header, .result-box, .loaded-image-preview-container{
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+
+/******        ADD IMAGE SECTION             *****/
+.add-image-container{
+    width: 100%;
+    text-align: center;
+    padding: 2% 4%;
+    transition: 0.35s all ease-in-out;
+}
+
+.add-image-container .upload-icon{
+    display: block;
+    margin: auto;
+    width: 10rem;
+    height: 10rem;
+}
+
+.add-image-container .upload-image-text, .add-image-container .upload-image-text-small{
+   margin-bottom: 4%;
+   font-size: 3rem;
+}
+
+.add-image-container .upload-image-text .extensions-allowed, .add-image-container .upload-image-text-small .extensions-allowed{
+   font-size: 2rem;
+}
+
+.add-image-container .upload-image-text-small{
+   display:none;
+}
+
+.add-image-container #upload-img{
+   position: absolute;
+   width: 0;
+   height: 0;
+   clip: rect(0, 0, 0, 0);
+}
+
+.add-image-container .browse-btn, .error-message-btn{
+   background-color: var(--blue);
+   color: var(--white);
+}
+
+.add-image-container, .error-div, .color-copied-div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/******        DRAG OVER             *****/
+.drag-over{
+    background: var(--grey);
+}
+
+
+/******        LOAD IMAGE SECTION             *****/
+.loaded-image-preview-container{
+    position: relative;
+    margin-top: 10%;
+    width: 70%;
+    display: none;
+}
+
+.loaded-image-preview-container h2{
+    margin-bottom: 2%;
+    font-weight: 700;
+}
+
+.loaded-image-preview{
+    max-width: 100%;
+    display: block;
+    margin-right: auto;
+}
+
+
+/******        ERROR DIV SECTION             *****/
+.error-div{
+    width: 30%;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2% 1%;
+    box-shadow: 0 0 0 100vmax var(--backgroundBlur);
+    z-index: 1;
+}
+
+.error-div .error-message{
+    color: var(--black);
+}
+.error-div .error-message-btn{
+    float: right;
+}
+
+
+/******        IMAGE DETAILS SECTION             *****/
+.image-details-container{
+    width: 70%;
+    margin: 5% auto;
+    display: none;
+}
+
+.image-details-container .result-box{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.image-details-container .result-box h5{
+    font-weight: 700;
+}
+
+.image-details-container .result-box > *{
+    width: calc(100% / 3);
+
+}
+
+.image-details-container .result{
+    margin: 1% 0;
+}
+
+.image-details-container .result .color .color-display{
+    width: 50%;
+    height: 100%;
+}
+
+.image-details-container .result .color .color-display p{
+    margin: 0;
+    text-align: center;
+    color: var(--white);
+    width: 100%;
+    line-height: 30px;
+    display: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--textBlurBg)), to(transparent));
+    background: linear-gradient(top, var(--textBlurBg), transparent);
+}
+
+.image-details-container .result .color .color-display:hover, .image-details-container .result .color .color-display:focus {
+    cursor: pointer;
+}
+
+
+/*****      UPLOAD NEW IMAGE SECTION        *****/
+.container-fluid .upload-new-link{
+    width: 70%;
+    display: none;
+    margin: 0 auto 5%;
+}
+
+.container-fluid .upload-new-link a.new-upload-btn{
+    color: var(--black);
+    background: var(--grey);
+    width: max-content;
+    margin-right: auto;
+}
+
+.container-fluid .upload-new-link a.new-upload-btn:hover, .container-fluid .upload-new-link a.new-upload-btn:focus{
+    color: var(--white);
+    background: var(--blue);
+}
+
+/******        LOADING ANIMATION SECTION             *****/
+#loading {
+    width: 5rem;
+    height: 5rem;
+    border: 5px solid var(--grey);
+    border-top: 6px solid var(--blue);
+    border-radius: 100%;
+    margin: 8% auto;
+    visibility: hidden;
+    animation: spin 1s infinite linear;
+    display: none;
+}
+
+#loading.display {
+    visibility: visible;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/******        COLOR COPIED SECTION             *****/
+.color-copied-div{
+    position: fixed;
+    height: 100vmax;
+    width: 100%;
+    z-index: 5;
+    color: white;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.color-copied-div h1.copy-message {
+    line-height: 100vmax;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/******        MEDIA QUERIES             *****/
+@media (max-width: 991px){
+    header{
+        padding: 3% 0;
+    }
+    .add-image-container .upload-image-text{
+        display: none;
+    }
+    .add-image-container .upload-image-text-small{
+        display: block;
+    }
+    .error-div, .image-details-container, .loaded-image-preview-container, .container-fluid .upload-new-link{
+        width: 96%;
+    }
+    .loaded-image-preview-container{
+        margin-top: 25%;
+    }
+    .loaded-image-preview-container h2{
+        margin-bottom: 4%;
+    }
+    .loaded-image-preview{
+        margin-bottom: 10%;
+    }
+    .error-div{
+        padding: 4% 2% 2%;
+    }
+    .container-fluid .upload-new-link{
+        margin: 10% auto 3%;
+    }
+}
