@@ -6,7 +6,6 @@ import numpy as np
 from rgb_to_hex_converter import convert_to_hex
 from collections import Counter
 import os
-from itertools import product
 
 load_dotenv()   # load the variables stored in the .env file
 
@@ -33,10 +32,11 @@ def display_results():
         img_hex_codes = []
 
         # getting the rgb values and converting to hex e.g rgb(0, 15, 10) == #000f0a
-        for row, column in product(range(img_arr.shape[0]), range(img_arr.shape[1])):   # the ideal way would be looping through each row then through colum but product() is faster than nested loops
-            # 'img_arr[row][column]' below returns an array with the rgb values like so: [10 15 10]
-            hex_code = convert_to_hex(img_arr[row][column][0], img_arr[row][column][1], img_arr[row][column][2])
-            img_hex_codes.append(hex_code)
+        for row in img_arr:
+            for color_row in row:
+                # 'color_row' below returns an array with the rgb values like so: [10 15 10]
+                hex_code = convert_to_hex(color_row[0], color_row[1], color_row[2])
+                img_hex_codes.append(hex_code)
 
         total_colors = len(img_hex_codes)   # the total number of colors present in the image
 
