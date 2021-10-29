@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_bootstrap import Bootstrap
 from dotenv import load_dotenv
 from PIL import Image
@@ -9,7 +9,7 @@ import os
 
 load_dotenv()   # load the variables stored in the .env file
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 app.secret_key = os.environ.get("SECRET_KEY")
 Bootstrap(app)
 
@@ -56,6 +56,11 @@ def display_results():
 
         os.remove(uploaded_file.filename)   # deleting the uploaded image
         return jsonify({"results": computed_results}), 200  # sending back the computed results
+
+
+@app.route("/robots.txt")
+def show_robots_text():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 
 if __name__ == "__main__":
