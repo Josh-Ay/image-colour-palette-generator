@@ -63,5 +63,10 @@ def show_robots_text():
     return send_from_directory(app.static_folder, request.path[1:])
 
 
+@app.errorhandler(404)
+def handle_page_not_found(e):
+    return jsonify({"message": "page not found"}), 404
+
+
 if __name__ == "__main__":
     app.run()
