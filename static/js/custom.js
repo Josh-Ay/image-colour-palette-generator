@@ -1,6 +1,6 @@
 const container = document.querySelector(".container-fluid");
 
-function customErrorDiv(message, containerElement){
+const customErrorDiv = (message, containerElement) =>{
     // create a new div and add a class to style it
     const errorDiv = document.createElement("div");
     errorDiv.className = "error-div";
@@ -41,7 +41,7 @@ function customErrorDiv(message, containerElement){
     okBtn.addEventListener("click", function(){errorDiv.remove()})
 };
 
-function customDiv(message, backgroundColor, containerElement, textColor){
+const customDiv = (message, backgroundColor, containerElement, textColor) =>{
     // create a new div and add a class and the 'color passed' parameter to style it
     const customDiv = document.createElement("div");
     customDiv.className = "color-copied-div";
@@ -75,7 +75,7 @@ function customDiv(message, backgroundColor, containerElement, textColor){
 };
 
 
-function customResultsDiv(resultList, containerElement){
+const customResultsDiv = (resultList, containerElement) =>{
     let newFragment = document.createDocumentFragment();    // creating a document fragment
     for(let i=0 ; i < resultList.length; i++ ){
         // creating the required elements
@@ -133,18 +133,18 @@ function customResultsDiv(resultList, containerElement){
 
         newFragment.appendChild(resultBox);     // appending the 'resultBox' div to the document fragment
 
-        color.addEventListener("mouseover", function(){ // to show the hex text on mouse hover
-            this.style.boxShadow = "10px 0 80px rgba(0, 0, 0, .5)";
+        color.addEventListener("mouseover", (e) => { // to show the hex text on mouse hover
+            e.target.style.boxShadow = "10px 0 80px rgba(0, 0, 0, .5)";
             colorCodeHoverParagraph.style.display = "block";
         });
 
-        color.addEventListener("mouseleave", function(){    // to hide the hex text on mouse leave
-            this.style.boxShadow = "none";
+        color.addEventListener("mouseleave", (e) => {    // to hide the hex text on mouse leave
+            e.target.style.boxShadow = "none";
             colorCodeHoverParagraph.style.display = "none";
         });
 
-        color.addEventListener("click", function(){ // to copy the hex text on click
-            const colorToCopy = this.children[1].innerText;
+        color.addEventListener("click", (e) => { // to copy the hex text on click
+            const colorToCopy = e.target.parentElement.children[1].innerText;
 
             navigator.clipboard.writeText(colorToCopy);
 
