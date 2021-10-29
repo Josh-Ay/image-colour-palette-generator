@@ -124,7 +124,7 @@ const sendLoadedImageToServer = (imageFileToSend) => {
 
     newForm.append("file", imageFileToSend)     // appending the file uploaded by the user to the form created above
 
-    newXMLRequest.open("POST", "/");
+    newXMLRequest.open("POST", "/", true);  // make asynchronous post request to server
     newXMLRequest.send(newForm);    // send the form data
 
     newXMLRequest.onload = (e) =>{
