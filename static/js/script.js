@@ -11,18 +11,18 @@ const uploadNewBtn = document.querySelector(".upload-new-link");
 
 
 // function to handle file/image drag over
-window.dragOver = function dragOver(element, e){
+window.dragOver = (element, e) =>{
     e.preventDefault(); // prevent browser's default behaviour handling the event(opening the file)
     element.classList.add("drag-over");
 };
 
 // function to handle file/image drag leave
-window.dragLeave = function dragLeave(element){
+window.dragLeave = (element) =>{
     element.classList.remove("drag-over");
 };
 
 // function to check if the filetype is an image
-function checkImageFile(fileType){
+const checkImageFile = (fileType) =>{
     const imageExtensions = ["jpg", "jpeg", "png"]; // list of accepted image file types
     let check = false;
 
@@ -35,7 +35,7 @@ function checkImageFile(fileType){
 };
 
 // function to remove 'select file' display and send the uploaded image
-function removeFileDisplayAndSendImage(fileAdded){
+const removeFileDisplayAndSendImage = (fileAdded) =>{
     addContainer.remove();  // remove the file upload display
 
     let newImgSrc = URL.createObjectURL(fileAdded);     // create a new blob url
@@ -53,7 +53,7 @@ function removeFileDisplayAndSendImage(fileAdded){
 }
 
 // function to handle file/image drop
-window.drop = function drop(element, e){
+window.drop = (element, e) =>{
     e.preventDefault(); // prevent browser's default behaviour handing the event(opening the file)
     element.classList.remove("drag-over");
 
@@ -76,19 +76,19 @@ window.drop = function drop(element, e){
 };
 
 // function to open 'select-file' dialog
-window.openFiles = function openFiles(){
+window.openFiles = () =>{
     uploadFile.click();     // opens up the 'select file' window
 };
 
 
-// handle image/file drag and drop into div
-window.addEventListener("load", function () {
-    uploadFile.addEventListener("change", function (){
-        if (this.files && this.files[0]) {
-            const result = checkImageFile(this.files[0].name);
+// handle image/file load into div
+window.addEventListener("load", () => {
+    uploadFile.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+            const result = checkImageFile(e.target.files[0].type);
 
             if (result){
-                removeFileDisplayAndSendImage(this.files[0]);
+                removeFileDisplayAndSendImage(e.target.files[0]);
             }else{
                 customErrorDiv("Please select an image.", container);
             }
@@ -97,7 +97,7 @@ window.addEventListener("load", function () {
 });
 
 // function to show loading animation
-function showLoadingAnimation(){
+const showLoadingAnimation = () =>{
     loading.style.display = "block";
     loading.classList.add("display");
 
@@ -111,14 +111,14 @@ function showLoadingAnimation(){
 
 
 // hide loading animation
-function hideLoadingAnimation(){
+const hideLoadingAnimation = () =>{
     loading.style.display = "none";
     loading.classList.remove("display");
 }
 
 
 // function to send uploaded file to server
-function sendLoadedImageToServer(imageFileToSend) {
+const sendLoadedImageToServer = (imageFileToSend) => {
     let newXMLRequest = new XMLHttpRequest();
     let newForm = new FormData();
 
@@ -127,7 +127,7 @@ function sendLoadedImageToServer(imageFileToSend) {
     newXMLRequest.open("POST", "/");
     newXMLRequest.send(newForm);    // send the form data
 
-    newXMLRequest.onload = function(e){
+    newXMLRequest.onload = (e) =>{
         if (newXMLRequest.readyState === 4) {
             if (newXMLRequest.status === 200) { // on successful response
                 const response = JSON.parse(newXMLRequest.responseText);    // parsing the response from the server as json instead of string
