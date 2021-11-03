@@ -118,28 +118,27 @@ const hideLoadingAnimation = () =>{
 
 
 // function to send uploaded file to server
-const sendLoadedImageToServer = (imageFileToSend) => {
-    let newXMLRequest = new XMLHttpRequest();
+const sendLoadedImageToServer = async (imageFileToSend) => {
     let newForm = new FormData();
 
     newForm.append("file", imageFileToSend)     // appending the file uploaded by the user to the form created above
 
-    newXMLRequest.open("POST", "/", true);  // make asynchronous post request to server
-    newXMLRequest.send(newForm);    // send the form data
+    // make asynchronous post request to server
+    const request = await fetch("/", {method: "POST", body: newForm})
+    .then((res) => {
+        if (res.status === 200){
+            const response = res.json();
 
-    newXMLRequest.onload = (e) =>{
-        if (newXMLRequest.readyState === 4) {
-            if (newXMLRequest.status === 200) { // on successful response
-                const response = JSON.parse(newXMLRequest.responseText);    // parsing the response from the server as json instead of string
+            response.then((results) => {
                 detailsContainer.style.display = "block";
-                customResultsDiv(response["results"], detailsContainer);    // create results div with the parsed response
+                customResultsDiv(results["results"], detailsContainer);    // create results div with the results gotten back
 
                 uploadNewBtn.style.display = "block";
-                hideLoadingAnimation();
-
-            } else {
-              console.error(newXMLRequest.statusText);
-            }
+                hideLoadingAnimation();     // hide loading animation
+            })
         }
-    };
+    }).catch(err => {
+        console.log(err);
+    });
+
 };
