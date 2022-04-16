@@ -1,6 +1,6 @@
-A website that finds the most common colours in an uploaded image.
+A website that finds the most common colors in an uploaded image.
 
-Try it out here [now](https://afternoon-caverns-26886.herokuapp.com/).
+Try it out here [now](https://image-color-palette-app.herokuapp.com/).
 
 # How it works:
 ![](demo/solution_demo.gif)
