@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html' %}
+
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="container-fluid page-not-found-container">
+    <figure>
+        <img class="absolute-position" src="/static/assets/404-page-not-found.svg" alt="404 resource not found illustration"/>
+    </figure>
+    <a class="btn btn-primary absolute-position" href="{{ url_for('home_blueprint.home') }}">Go Home</a>
+</div>
+
+{% include "footer.html" %}
+
+
+{% endblock %}

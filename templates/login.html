@@ -1,0 +1,41 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="login-page-container absolute-position">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ card_title }}</h2>
+        </div>
+        <div class="card-body">
+            <h5>{{ card_message }}</h5>
+            {% for messages in get_flashed_messages(): %}
+                <p class="error-message-auth"> {{ messages }} </p>
+            {% endfor %}
+            <div class="social-actions-container">
+                <div class="social-login-container" tabindex="0" aria-label="continue to image color palette generator with google" onclick="document.getElementById('form-1').submit();">
+                    <form id="form-1" method="post" action="/oauth/auth/google">
+                        <figure>
+                            <img src="/static/assets/google-icon.svg" alt="google icon">
+                        </figure>
+                    </form>
+                </div>
+                <div class="social-login-container" tabindex="0" aria-label="continue to image color palette generator with github" onclick="document.getElementById('form-2').submit();">
+                    <form id="form-2" method="post" action="/oauth/auth/github">
+                        <figure>
+                            <img src="/static/assets/github-icon.svg" alt="github icon">
+                        </figure>
+                    </form>
+                </div>
+                <div class="reroute-container">
+                    <a href="{{ url_for(reroute_to, auth_type=auth_type) }}">{{ auth_type }}?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

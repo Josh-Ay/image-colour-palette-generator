@@ -1,72 +1,24 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
-from flask_bootstrap import Bootstrap
-from dotenv import load_dotenv
-from PIL import Image
-import numpy as np
-from rgb_to_hex_converter import convert_to_hex
-from collections import Counter
-import os
+from app import create_flask_app
+from app.flask_app_config import DevelopmentConfig
+from app.routes_blueprint.users_blueprint import users_blueprint
+from app.routes_blueprint.home_blueprint import home_blueprint
+from app.routes_blueprint.authentication_blueprints import authentication_blueprint
+from app.error_handlers.error_routes import handle_page_not_found, handle_unauthorized_access
+from app.robots_text_handler.robots_text_handler import robots_text_blueprint
 
-load_dotenv()   # load the variables stored in the .env file
+# creating a new flask application
+app = create_flask_app(DevelopmentConfig())
 
-app = Flask(__name__, static_folder="static")
-app.secret_key = os.environ.get("SECRET_KEY")
-Bootstrap(app)
+# registering blueprints/views for the flask application
+app.register_blueprint(home_blueprint, url_prefix="/")
+app.register_blueprint(users_blueprint, url_prefix="/users")
+app.register_blueprint(authentication_blueprint, url_prefix="/oauth")
+app.register_blueprint(robots_text_blueprint, url_prefix="")
 
-
-@app.route("/")
-def home():
-
-    return render_template("index.html")
-
-
-@app.route("/", methods=["POST"])
-def display_results():
-    uploaded_file = request.files['file']   # getting the uploaded file
-    if uploaded_file != "":
-        uploaded_file.save(uploaded_file.filename)  # the uploaded image has to be saved before PIL can open it
-
-        # creating a numpy array from the uploaded image opened by PIL
-        img_arr = np.array(Image.open(uploaded_file.filename))
-
-        img_hex_codes = []
-
-        # getting the rgb values and converting to hex e.g rgb(0, 15, 10) == #000f0a
-        for row in img_arr:
-            for color_row in row:
-                # 'color_row' below returns an array with the rgb values like so: [10 15 10]
-                hex_code = convert_to_hex(color_row[0], color_row[1], color_row[2])
-                img_hex_codes.append(hex_code)
-
-        total_colors = len(img_hex_codes)   # the total number of colors present in the image
-
-        counter = Counter(img_hex_codes)    # get the count of all the colors
-        top_10_colors_list = counter.most_common(10)    # returns the most common 10 as a list as so: [('#hex_code', count), ('#hex_code', count), ....]
-
-        computed_results = []
-        result = {}
-
-        for color_occurrence in top_10_colors_list:
-            color_hex, count = color_occurrence
-            percentage_occurrence = round((count / total_colors), 6)
-            result["color_code"], result["percent_count"] = color_hex, percentage_occurrence
-
-            computed_results.append(result)
-            result = {}
-
-        os.remove(uploaded_file.filename)   # deleting the uploaded image
-        return jsonify({"results": computed_results}), 200  # sending back the computed results
-
-
-@app.route("/robots.txt")
-def show_robots_text():
-    return send_from_directory(app.static_folder, request.path[1:])
-
-
-@app.errorhandler(404)
-def handle_page_not_found(e):
-    return jsonify({"message": "page not found"}), 404
+# registering error handlers for the flask application
+app.register_error_handler(403, handle_unauthorized_access)
+app.register_error_handler(404, handle_page_not_found)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

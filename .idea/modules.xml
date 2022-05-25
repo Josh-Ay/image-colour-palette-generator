@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/image-colour-palette-generator.iml" filepath="$PROJECT_DIR$/.idea/image-colour-palette-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/image_colour_palette_generator.iml" filepath="$PROJECT_DIR$/.idea/image-colour-palette-generator.iml" />
     </modules>
   </component>
 </project>

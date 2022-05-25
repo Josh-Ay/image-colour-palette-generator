@@ -3,45 +3,63 @@
 {% include "header.html" %}
 
 {% block content %}
-    <div class="container-fluid">
-        <header>
-            <h1 style="text-align: center; font-size: 3.6rem;">Colour Extractor</h1>
-        </header>
-
-        <div class="add-image-container" ondragover="dragOver(this, event)" ondragleave="dragLeave(this)" ondrop="drop(this, event)">
+<div class="add-image-container absolute-position" ondragover="dragOver(this, event)" ondragleave="dragLeave(this)"
+     ondrop="drop(this, event)" xmlns="http://www.w3.org/1999/html">
+        <figure>
             <img onclick="openFiles()" class="upload-icon" src="/static/assets/cloud-icon.svg" alt="cloud icon">
-            <h2 class="upload-image-text" onclick="openFiles()">Drag and drop to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
-            <h2 class="upload-image-text-small" onclick="openFiles()">Click to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
-            <label for="upload-img" class="btn browse-btn">
-                Browse Files
-            </label>
-            <input id="upload-img" type="file">
-        </div>
+        </figure>
+        <h2 class="upload-image-text" onclick="openFiles()">Drag and drop to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
+        <h2 class="upload-image-text-small" onclick="openFiles()">Click to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
+        <label for="upload-img" class="btn browse-btn">
+            Browse Files
+        </label>
+        <input id="upload-img" class="absolute-position" type="file">
+    </div>
 
-        <div class="loaded-image-preview-container">
-            <h2>Image: </h2>
-            <img src="" class="loaded-image-preview" alt="image uploaded by you">
-        </div>
+    <div class="loaded-image-preview-container">
+        <h2>Image: </h2>
+        <img src="" class="loaded-image-preview" alt="image uploaded by you">
+    </div>
 
-        <div class="image-details-container">
-            <h3>Details: </h3>
-            <div class="result-box">
-                <div class="color">
-                    <h5>Color</h5>
-                </div>
-                <div class="color-code">
-                    <h5>Color Code</h5>
-                </div>
-                <div class="color-percentage">
-                    <h5>Percentage</h5>
-                </div>
+    <div class="image-details-container">
+        <h3>Details: </h3>
+        <div class="result-box">
+            <div class="color">
+                <h5>Color</h5>
+            </div>
+            <div class="color-code">
+                <h5>Color Code</h5>
+            </div>
+            <div class="color-percentage">
+                <h5>Percentage</h5>
             </div>
         </div>
+    </div>
 
-        <div id="loading"></div>
+    <div id="loading"></div>
 
-        <div class="upload-new-link">
-            <a href="{{ url_for('home') }}" class="btn new-upload-btn" aria-label="Upload a new image">Upload New</a>
+    <div class="upload-new-link">
+        <a href="{{ url_for('home_blueprint.home') }}" class="btn new-upload-btn" aria-label="Upload a new image">Upload New</a>
+    </div>
+
+    <div class="about-container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Get a color palette from an image</h2>
+            </div>
+            <div class="card-body">
+                <p>
+                    This is a simple website that finds the <span class="blue-color"><strong>most common colors</strong></span> in an uploaded image and
+                    generates a color palette for you! <br /><br /> <span class="blue-color text-uppercase"><strong>Note:</strong></span> You have to be <span class="blue-color"><strong>signed in</strong></span> to save your generated
+                    color palettes.
+                </p>
+                <br /><br />
+                <h3>Features</h3>
+                <p>Get the <span class="blue-color"><strong>most common colors</strong></span> in an image effectively creating a <span class="blue-color"> <strong>color palette</strong></span> for you!</p>
+                <img src="/static/assets/demos/solution_demo.gif" class="image-demos" alt="demo image of how this webapp extracts the colors from an uploaded image" />
+                <p><span class="blue-color"><strong>Copy</strong></span> the hex code from the results with a click!</p>
+                <p><span class="blue-color"><strong>Save</strong></span> your generated color palette!</p>
+            </div>
         </div>
     </div>
 
