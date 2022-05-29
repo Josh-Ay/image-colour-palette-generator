@@ -1,0 +1,27 @@
+
+/******        COLOR COPIED SECTION             *****/
+.color-copied-div{
+    position: fixed;
+    height: 100vmax;
+    width: 100%;
+    z-index: 5;
+    color: white;
+    animation: fadeIn 0.4s ease-in-out;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1.copy-message {
+        line-height: 100vmax;
+        text-align: center;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

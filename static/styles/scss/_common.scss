@@ -1,0 +1,89 @@
+.container-fluid{
+    height: 100%;
+}
+
+.absolute-position{
+    position: absolute;
+}
+
+.blue-color{
+    color: var(--blue) !important;
+}
+
+.btn-custom-outline{
+    transition: 0.5s all ease-in-out;
+
+    &:hover, &:focus{
+        background: var(--backgroundBlur);
+    }
+}
+
+.card{
+    box-shadow: 4px 6px 6px 4px var(--backgroundBlur-2);
+    padding: 7%;
+    border-radius: 6px;
+    width: clamp(35rem, 45vw, 100rem);
+    margin: 0 auto;
+}
+
+/******        DRAG OVER             *****/
+.drag-over{
+    background: var(--grey);
+}
+
+/******        ERROR DIV SECTION             *****/
+.error-div{
+    width: 30%;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2% 1%;
+    box-shadow: 0 0 0 100vmax var(--backgroundBlur);
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .error-message{
+        color: var(--black);
+    }
+
+    .error-message-btn{
+        float: right;
+    }
+}
+
+.error-message-auth{
+    color: var(--deep-red);
+    background: var(--light-red);
+    border: 2px solid var(--pale-red);
+    padding: 1% 3%;
+}
+
+.error-message-btn{
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.rel-position{
+    position: relative !important;
+}
+
+.image-demos{
+    display: block;
+    height: 50%;
+    width: 100%;
+    max-width: 100%;
+    margin: 7% 0 10%;
+}
+
+.text-white{
+    color: var(--white) !important;
+}
+
+@media (max-width: 991px){
+    .error-div{
+        width: 96%;
+        padding: 4% 2% 2%;
+    }
+}

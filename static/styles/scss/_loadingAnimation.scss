@@ -1,0 +1,25 @@
+/******        LOADING ANIMATION SECTION             *****/
+#loading {
+    width: 5rem;
+    height: 5rem;
+    border: 5px solid var(--grey);
+    border-top: 6px solid var(--blue);
+    border-radius: 100%;
+    margin: 8% auto;
+    visibility: hidden;
+    animation: spin 1s infinite linear;
+    display: none;
+
+    &.display{
+        visibility: visible;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

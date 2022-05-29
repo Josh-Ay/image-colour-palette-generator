@@ -1,0 +1,54 @@
+/******        ADD IMAGE SECTION             *****/
+.add-image-container{
+    width: 100%;
+    text-align: center;
+    padding: 2% 4%;
+    transition: 0.35s all ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .browse-btn{
+        background-color: var(--blue);
+        color: var(--white);
+    }
+
+    .upload-icon{
+        display: block;
+        margin: auto;
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .upload-image-text, .upload-image-text-small{
+        margin-bottom: 4%;
+        font-size: 3rem;
+    }
+
+    .upload-image-text .extensions-allowed, .upload-image-text-small .extensions-allowed{
+        font-size: 2rem;
+    }
+
+    .upload-image-text-small{
+        display:none;
+    }
+
+    #upload-img{
+        width: 0;
+        height: 0;
+        clip: rect(0, 0, 0, 0);
+    }
+}
+
+@media (max-width: 991px){
+
+    .add-image-container {
+        .upload-image-text{
+            display: none;
+        }
+        .upload-image-text-small{
+            display: block;
+        }
+    }
+}

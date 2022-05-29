@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@import "./variables";
+
+@import "./common";
+@import "./header";
+@import "./addNewImage";
+@import "./imageResults";
+@import "./uploadImage";
+@import "./loadingAnimation";
+@import "./colorCopiedSection";
+@import "./errorPage";
+@import "./loginPage";
+@import "./aboutSection";

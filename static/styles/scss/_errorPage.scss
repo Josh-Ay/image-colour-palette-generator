@@ -1,0 +1,31 @@
+/****   404 PAGE  *****/
+.page-not-found-container{
+    height: 100%;
+    animation: fadeIn 1s ease-in-out;
+
+    figure img, a{
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    figure img{
+        width: 55%;
+        max-width: 100%;
+        display: block;
+        top: 50%;
+    }
+
+    a{
+        bottom: 10%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

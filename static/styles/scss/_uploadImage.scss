@@ -1,0 +1,27 @@
+/*****      UPLOAD NEW IMAGE SECTION        *****/
+.container-fluid .upload-new-link{
+    width: 70%;
+    display: none;
+    margin: 0 auto 5%;
+
+    a.new-upload-btn{
+        color: var(--black);
+        background: var(--grey);
+        width: max-content;
+        margin-right: auto;
+
+        &:hover, &:focus{
+            color: var(--white);
+            background: var(--blue);
+        }
+    }
+}
+
+@media (max-width: 991px){
+
+    .container-fluid .upload-new-link{
+        width: 96%;
+        margin: 10% auto;
+    }
+
+}

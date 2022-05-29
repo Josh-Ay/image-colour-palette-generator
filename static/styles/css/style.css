@@ -1,0 +1,573 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/***    Variables to hold colors  ***/
+:root {
+  --blue: #38b6ff;
+  --grey: #D3D3D3;
+  --white: #fff;
+  --black: #000;
+  --grey: #f3f3f3;
+  --deep-red: #852b3a;
+  --light-red: #ffdde2;
+  --pale-red: #ffcfd7;
+  --backgroundBlur: rgba(0, 0, 0, .5);
+  --backgroundBlur-2: rgba(0, 0, 0, 0.05);
+  --textBlurBg: rgba(0, 0, 0, 1);
+}
+
+/******        CONTAINER             *****/
+.container-fluid {
+  height: 100%;
+}
+
+.absolute-position {
+  position: absolute;
+}
+
+.blue-color {
+  color: var(--blue) !important;
+}
+
+.btn-custom-outline {
+  -webkit-transition: 0.5s all ease-in-out;
+  transition: 0.5s all ease-in-out;
+}
+
+.btn-custom-outline:hover, .btn-custom-outline:focus {
+  background: var(--backgroundBlur);
+}
+
+.card {
+  -webkit-box-shadow: 4px 6px 6px 4px var(--backgroundBlur-2);
+          box-shadow: 4px 6px 6px 4px var(--backgroundBlur-2);
+  padding: 7%;
+  border-radius: 6px;
+  width: clamp(35rem, 45vw, 100rem);
+  margin: 0 auto;
+}
+
+.error-message-auth {
+  color: var(--deep-red);
+  background: var(--light-red);
+  border: 2px solid var(--pale-red);
+  padding: 1% 3%;
+}
+
+.image-demos {
+  display: block;
+  height: 50%;
+  width: 100%;
+  max-width: 100%;
+  margin: 7% 0 10%;
+}
+
+/******        HEADER             *****/
+header {
+  background: var(--blue);
+  position: fixed;
+  -webkit-box-shadow: 1px 0 15px var(--backgroundBlur);
+          box-shadow: 1px 0 15px var(--backgroundBlur);
+  padding: 1.3% 8%;
+  z-index: 3;
+}
+
+header .header-wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+header .header-wrapper h1 {
+  font-size: 3.6rem;
+  cursor: pointer;
+}
+
+header .header-wrapper h1, header .header-wrapper p {
+  margin: 0;
+  color: var(--white);
+}
+
+header .header-wrapper a {
+  font-size: 1.6rem;
+}
+
+header .header-wrapper .user-actions-container, header .header-wrapper .user-details {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .header-wrapper .user-actions-container a:first-child {
+  margin-right: 20%;
+}
+
+header, .result-box, .loaded-image-preview-container {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+}
+
+/******        ADD IMAGE SECTION             *****/
+.add-image-container {
+  width: 100%;
+  text-align: center;
+  padding: 2% 4%;
+  -webkit-transition: 0.35s all ease-in-out;
+  transition: 0.35s all ease-in-out;
+}
+
+.add-image-container .upload-icon {
+  display: block;
+  margin: auto;
+  width: 10rem;
+  height: 10rem;
+}
+
+.add-image-container .upload-image-text, .add-image-container .upload-image-text-small {
+  margin-bottom: 4%;
+  font-size: 3rem;
+}
+
+.add-image-container .upload-image-text .extensions-allowed, .add-image-container .upload-image-text-small .extensions-allowed {
+  font-size: 2rem;
+}
+
+.add-image-container .upload-image-text-small {
+  display: none;
+}
+
+.add-image-container #upload-img {
+  width: 0;
+  height: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+.add-image-container .browse-btn, .error-message-btn {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.add-image-container, .login-page-container, .error-div, .color-copied-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+/******        DRAG OVER             *****/
+.drag-over {
+  background: var(--grey);
+}
+
+/******        LOAD IMAGE SECTION             *****/
+.loaded-image-preview-container {
+  position: relative;
+  margin-top: 10%;
+  width: 70%;
+  display: none;
+}
+
+.loaded-image-preview-container h2 {
+  margin-bottom: 2%;
+  font-weight: 700;
+}
+
+.loaded-image-preview {
+  max-width: 100%;
+  display: block;
+  margin-right: auto;
+}
+
+/******        ERROR DIV SECTION             *****/
+.error-div {
+  width: 30%;
+  background: var(--white);
+  border-radius: 8px;
+  padding: 2% 1%;
+  -webkit-box-shadow: 0 0 0 100vmax var(--backgroundBlur);
+          box-shadow: 0 0 0 100vmax var(--backgroundBlur);
+  z-index: 1;
+}
+
+.error-div .error-message {
+  color: var(--black);
+}
+
+.error-div .error-message-btn {
+  float: right;
+}
+
+/******        IMAGE DETAILS SECTION             *****/
+.image-details-container {
+  width: 70%;
+  margin: 5% auto;
+  display: none;
+}
+
+.image-details-container .result-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.image-details-container .result-box h5 {
+  font-weight: 700;
+}
+
+.image-details-container .result-box > * {
+  width: calc(100% / 3);
+}
+
+.image-details-container .result {
+  margin: 1% 0;
+}
+
+.image-details-container .result .color .color-display {
+  width: 50%;
+  height: 100%;
+}
+
+.image-details-container .result .color .color-display p {
+  margin: 0;
+  text-align: center;
+  color: var(--white);
+  width: 100%;
+  line-height: 30px;
+  display: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--textBlurBg)), to(transparent));
+  background: linear-gradient(top, var(--textBlurBg), transparent);
+}
+
+.image-details-container .result .color .color-display:hover, .image-details-container .result .color .color-display:focus {
+  cursor: pointer;
+}
+
+/*****      UPLOAD NEW IMAGE SECTION        *****/
+.container-fluid .upload-new-link {
+  width: 70%;
+  display: none;
+  margin: 0 auto 5%;
+}
+
+.container-fluid .upload-new-link a.new-upload-btn {
+  color: var(--black);
+  background: var(--grey);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-right: auto;
+}
+
+.container-fluid .upload-new-link a.new-upload-btn:hover, .container-fluid .upload-new-link a.new-upload-btn:focus {
+  color: var(--white);
+  background: var(--blue);
+}
+
+/******        LOADING ANIMATION SECTION             *****/
+#loading {
+  width: 5rem;
+  height: 5rem;
+  border: 5px solid var(--grey);
+  border-top: 6px solid var(--blue);
+  border-radius: 100%;
+  margin: 8% auto;
+  visibility: hidden;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+  display: none;
+}
+
+#loading.display {
+  visibility: visible;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+/******        COLOR COPIED SECTION             *****/
+.color-copied-div {
+  position: fixed;
+  height: 100vmax;
+  width: 100%;
+  z-index: 5;
+  color: white;
+  -webkit-animation: fadeIn 0.4s ease-in-out;
+          animation: fadeIn 0.4s ease-in-out;
+}
+
+.color-copied-div h1.copy-message {
+  line-height: 100vmax;
+  text-align: center;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/****   404 PAGE  *****/
+.page-not-found-container {
+  height: 100%;
+  -webkit-animation: fadeIn 1s ease-in-out;
+          animation: fadeIn 1s ease-in-out;
+}
+
+.page-not-found-container figure img, .page-not-found-container a {
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.page-not-found-container figure img {
+  width: 55%;
+  max-width: 100%;
+  display: block;
+  top: 50%;
+}
+
+.page-not-found-container a {
+  bottom: 10%;
+}
+
+/*****      LOGIN PAGE  *****/
+.login-page-container .social-actions-container {
+  margin-top: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-page-container .social-actions-container .social-login-container, .login-page-container .social-actions-container .reroute-container {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-page-container .social-actions-container .social-login-container {
+  border-radius: 50%;
+  height: clamp(5rem, 4.5vw, 20rem);
+  width: clamp(5rem, 4.5vw, 20rem);
+  background: var(--blue);
+}
+
+.login-page-container .social-actions-container .social-login-container:hover, .login-page-container .social-actions-container .social-login-container:focus {
+  -webkit-transition: 0.45s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition: 0.45s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  -webkit-transform: translateY(-10%);
+          transform: translateY(-10%);
+}
+
+.login-page-container .social-actions-container .social-login-container:hover {
+  -webkit-filter: opacity(0.8);
+          filter: opacity(0.8);
+}
+
+.login-page-container .social-actions-container .social-login-container:focus {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+}
+
+.login-page-container .social-actions-container .reroute-container {
+  position: relative;
+  height: clamp(2rem, 2.5vw, 20rem);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.login-page-container .social-actions-container .reroute-container a {
+  text-decoration: none;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.login-page-container .social-actions-container .reroute-container a:hover, .login-page-container .social-actions-container .reroute-container a:focus {
+  color: var(--blue);
+}
+
+.login-page-container .social-actions-container .reroute-container::before {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 10px;
+  background: var(--blue);
+  -webkit-transition: 1s;
+  transition: 1s;
+  bottom: 0;
+}
+
+.login-page-container .social-actions-container .reroute-container:hover::before, .login-page-container .social-actions-container .reroute-container:focus::before {
+  width: 100%;
+}
+
+.login-page-container .card .card-body .form label[for=display_name] {
+  margin-top: 5%;
+}
+
+/*******    ABOUT CONTAINER     *******/
+.about-container {
+  width: 100%;
+  position: relative;
+  margin: 55% auto 10%;
+  text-align: center;
+}
+
+.about-container .card {
+  width: 70%;
+}
+
+/******        MEDIA QUERIES             *****/
+@media (min-width: 992px) and (max-width: 1200px) {
+  .about-container {
+    margin: 105% auto 20%;
+  }
+  .about-container .card {
+    width: 75%;
+  }
+}
+
+@media (max-width: 991px) {
+  header {
+    padding: 3% 8%;
+  }
+  header .header-wrapper h1 {
+    font-size: 2.4rem;
+  }
+  header .header-wrapper a {
+    font-size: 1.2rem;
+  }
+  header .header-wrapper .user-actions-container a:first-child {
+    margin-right: 0%;
+  }
+  .add-image-container .upload-image-text {
+    display: none;
+  }
+  .add-image-container .upload-image-text-small {
+    display: block;
+  }
+  .error-div, .image-details-container, .loaded-image-preview-container, .container-fluid .upload-new-link {
+    width: 96%;
+  }
+  .loaded-image-preview-container {
+    margin-top: 35%;
+  }
+  .loaded-image-preview-container h2 {
+    margin-bottom: 4%;
+  }
+  .loaded-image-preview {
+    margin-bottom: 10%;
+  }
+  .image-details-container .result {
+    margin: 1.8% 0;
+  }
+  .error-div {
+    padding: 4% 2% 2%;
+  }
+  .container-fluid .upload-new-link {
+    margin: 10% auto;
+  }
+  .about-container {
+    margin: 130% auto 20%;
+  }
+  .about-container .card {
+    width: 85%;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-container {
+    margin: 145% auto 40%;
+  }
+}
+
+@media (max-width: 576px) {
+  header {
+    padding: 3%;
+    padding-left: 5%;
+  }
+  .about-container {
+    margin: 195% auto 40%;
+  }
+  .about-container .card {
+    width: 95%;
+  }
+}
+
+@media (max-width: 435px) {
+  .about-container {
+    margin: 275% auto 70%;
+  }
+}
+/*# sourceMappingURL=style.css.map */

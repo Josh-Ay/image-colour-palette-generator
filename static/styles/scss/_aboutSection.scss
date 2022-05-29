@@ -1,0 +1,55 @@
+/*******    ABOUT CONTAINER     *******/
+.about-container{
+    width: 100%;
+    position: relative;
+    margin: 55% auto 10%;
+    text-align: center;
+
+    .card{
+        width: 70%;
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1200px){
+    .about-container{
+        margin: 105% auto 20%;
+
+        .card{
+            width: 75%;
+        }
+    }
+}
+
+@media (max-width: 991px){
+    
+    .about-container{
+        margin: 130% auto 20%;
+
+        .card{
+            width: 85%;
+        }
+    }
+
+}
+
+@media(max-width: 767px){
+    .about-container{
+        margin: 145% auto 40%;
+    }
+}
+
+@media (max-width: 576px){
+    .about-container{
+        margin: 195% auto 40%;
+
+        .card{
+            width: 95%;
+        }
+    }
+}
+
+@media(max-width: 435px){
+    .about-container{
+        margin: 275% auto 70%;
+    }
+}

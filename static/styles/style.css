@@ -3,6 +3,8 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /***    Variables to hold colors  ***/
@@ -12,7 +14,11 @@
     --white: #fff;
     --black: #000;
     --grey: #f3f3f3;
+    --deep-red: #852b3a;
+    --light-red: #ffdde2;
+    --pale-red: #ffcfd7;
     --backgroundBlur: rgba(0, 0, 0, .5);
+    --backgroundBlur-2: rgba(0, 0, 0, 0.05);
     --textBlurBg: rgba(0, 0, 0, 1);
 }
 
@@ -21,20 +27,84 @@
     height: 100%;
 }
 
+.absolute-position{
+    position: absolute;
+}
+
+.blue-color{
+    color: var(--blue) !important;
+}
+
+.btn-custom-outline{
+    transition: 0.5s all ease-in-out;
+}
+
+.btn-custom-outline:hover, .btn-custom-outline:focus{
+    background: var(--backgroundBlur);
+}
+
+.card{
+    box-shadow: 4px 6px 6px 4px var(--backgroundBlur-2);
+    padding: 7%;
+    border-radius: 6px;
+    width: clamp(35rem, 45vw, 100rem);
+    margin: 0 auto;
+}
+
+.error-message-auth{
+    color: var(--deep-red);
+    background: var(--light-red);
+    border: 2px solid var(--pale-red);
+    padding: 1% 3%;
+}
+
+.image-demos{
+    display: block;
+    height: 50%;
+    width: 100%;
+    max-width: 100%;
+    margin: 7% 0 10%;
+}
+
 
 /******        HEADER             *****/
 header{
     background: var(--blue);
     position: fixed;
-    color: var(--white);
     box-shadow: 1px 0 15px var(--backgroundBlur);
-    width: 100%;
-    padding: 1% 0;
+    padding: 1.3% 8%;
     z-index: 3;
 }
 
-header h1{
+header .header-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header .header-wrapper h1, header .header-wrapper p{
     margin: 0;
+    color: var(--white);
+}
+
+header .header-wrapper h1{
+    font-size: 3.6rem;
+    cursor: pointer;
+}
+
+header .header-wrapper a{
+    font-size: 1.6rem;
+}
+
+header .header-wrapper .user-actions-container, header .header-wrapper .user-details{
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .header-wrapper .user-actions-container a:first-child{
+    margin-right: 20%;
 }
 
 header, .result-box, .loaded-image-preview-container{
@@ -73,7 +143,6 @@ header, .result-box, .loaded-image-preview-container{
 }
 
 .add-image-container #upload-img{
-   position: absolute;
    width: 0;
    height: 0;
    clip: rect(0, 0, 0, 0);
@@ -84,7 +153,7 @@ header, .result-box, .loaded-image-preview-container{
    color: var(--white);
 }
 
-.add-image-container, .error-div, .color-copied-div{
+.add-image-container, .login-page-container, .error-div, .color-copied-div{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -255,10 +324,135 @@ header, .result-box, .loaded-image-preview-container{
 }
 
 
+/****   404 PAGE  *****/
+.page-not-found-container{
+    height: 100%;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.page-not-found-container figure img, .page-not-found-container a{
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.page-not-found-container figure img{
+    width: 55%;
+    max-width: 100%;
+    display: block;
+    top: 50%;
+}
+
+.page-not-found-container a{
+    bottom: 10%;
+}
+
+/*****      LOGIN PAGE  *****/
+.login-page-container .social-actions-container{
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-page-container .social-actions-container .social-login-container, .login-page-container .social-actions-container .reroute-container{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page-container .social-actions-container .social-login-container{
+    border-radius: 50%;
+    height: clamp(5rem, 4.5vw, 20rem);
+    width: clamp(5rem, 4.5vw, 20rem);
+    background: var(--blue);
+}
+
+.login-page-container .social-actions-container .reroute-container{
+    position: relative;
+    height: clamp(2rem, 2.5vw, 20rem);
+    transition: 1s;
+}
+
+.login-page-container .social-actions-container .reroute-container a{
+    text-decoration: none;
+    color: var(--black);
+    text-transform: capitalize;
+}
+
+.login-page-container .social-actions-container .reroute-container::before{
+    position: absolute;
+    content: "";
+    height: 1px;
+    width: 10px;
+    background: var(--blue);
+    transition: 1s;
+    bottom: 0;
+}
+
+.login-page-container .social-actions-container .reroute-container a:hover, .login-page-container .social-actions-container .reroute-container a:focus{
+    color: var(--blue);
+}
+
+
+.login-page-container .social-actions-container .reroute-container:hover::before, .login-page-container .social-actions-container .reroute-container:focus::before{
+    width: 100%;
+}
+
+.login-page-container .card .card-body .form label[for=display_name]{
+    margin-top: 5%;
+}
+
+.social-login-container:hover, .social-login-container:focus{
+    transition: 0.45s cubic-bezier(.17, .67, .83, .67);
+    transform: translateY(-10%);
+}
+
+.social-login-container:hover{
+    filter: opacity(0.8);
+}
+
+.social-login-container:focus{
+    filter: brightness(0.9);
+}
+
+
+/*******    ABOUT CONTAINER     *******/
+.about-container{
+    width: 100%;
+    position: relative;
+    margin: 55% auto 10%;
+    text-align: center;
+}
+
+.about-container .card{
+    width: 70%;
+}
+
+
 /******        MEDIA QUERIES             *****/
+@media(min-width: 992px) and (max-width: 1200px){
+    .about-container{
+        margin: 105% auto 20%;
+    }
+    .about-container .card{
+        width: 75%;
+    }
+}
+
 @media (max-width: 991px){
     header{
-        padding: 3% 0;
+        padding: 3% 8%;
+    }
+    header .header-wrapper h1{
+        font-size: 2.4rem;
+    }
+    header .header-wrapper a{
+        font-size: 1.2rem;
+    }
+    header .header-wrapper .user-actions-container a:first-child{
+        margin-right: 0%;
     }
     .add-image-container .upload-image-text{
         display: none;
@@ -270,7 +464,7 @@ header, .result-box, .loaded-image-preview-container{
         width: 96%;
     }
     .loaded-image-preview-container{
-        margin-top: 25%;
+        margin-top: 35%;
     }
     .loaded-image-preview-container h2{
         margin-bottom: 4%;
@@ -278,10 +472,44 @@ header, .result-box, .loaded-image-preview-container{
     .loaded-image-preview{
         margin-bottom: 10%;
     }
+    .image-details-container .result{
+        margin: 1.8% 0;
+    }
     .error-div{
         padding: 4% 2% 2%;
     }
     .container-fluid .upload-new-link{
-        margin: 10% auto 3%;
+        margin: 10% auto;
+    }
+    .about-container{
+        margin: 130% auto 20%;
+    }
+    .about-container .card{
+        width: 85%;
+    }
+}
+
+@media(max-width: 767px){
+    .about-container{
+        margin: 145% auto 40%;
+    }
+}
+
+@media(max-width: 576px){
+    header{
+        padding: 3%;
+        padding-left: 5%;
+    }
+    .about-container{
+        margin: 195% auto 40%;
+    }
+    .about-container .card{
+        width: 95%;
+    }
+}
+
+@media(max-width: 435px){
+    .about-container{
+        margin: 275% auto 70%;
     }
 }

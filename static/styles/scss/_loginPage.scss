@@ -1,0 +1,75 @@
+/*****      LOGIN PAGE  *****/
+.login-page-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    .social-actions-container{
+        margin-top: 15%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .social-login-container, .reroute-container{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-login-container{
+            border-radius: 50%;
+            height: clamp(5rem, 4.5vw, 20rem);
+            width: clamp(5rem, 4.5vw, 20rem);
+            background: var(--blue);
+
+            &:hover, &:focus{
+                transition: 0.45s cubic-bezier(.17, .67, .83, .67);
+                transform: translateY(-10%);
+            }
+
+            &:hover{
+                filter: opacity(0.8);
+            }
+            
+            &:focus{
+                filter: brightness(0.9);
+            }
+        }
+
+        .reroute-container{
+            position: relative;
+            height: clamp(2rem, 2.5vw, 20rem);
+            transition: 1s;
+
+            a{
+                text-decoration: none;
+                color: var(--black);
+                text-transform: capitalize;
+
+                &:hover, &:focus{
+                    color: var(--blue);
+                }
+            }
+
+            &::before{
+                position: absolute;
+                content: "";
+                height: 1px;
+                width: 10px;
+                background: var(--blue);
+                transition: 1s;
+                bottom: 0;
+            }
+
+            &:hover::before, &:focus::before{
+                width: 100%;
+            }
+        }
+    }
+
+    .card .card-body .form label[for=display_name]{
+        margin-top: 5%;
+    }
+}
