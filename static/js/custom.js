@@ -148,8 +148,8 @@ const customResultsDiv = (resultList, containerElement) =>{
 
             navigator.clipboard.writeText(colorToCopy);
 
-            // check if the 'colorToCopy' has more than 2f's in its hex code(i.e a very light color) and if so set the color of text within to "black"
-            if (((colorToCopy.match(/f/g) || []).length) > 2){
+            // check if the 'colorToCopy' has more than 1f or 1e in its hex code(i.e a very light color) and if so set the color of text within to "black"
+            if ( ((colorToCopy.match(/f/g) || []).length) > 1 || ((colorToCopy.match(/e/g) || []).length) > 1 ){
                 customDiv(`Copied ${colorToCopy}`, colorToCopy, container, "#000");
             }else{
                 customDiv(`Copied ${colorToCopy}`, colorToCopy, container);
