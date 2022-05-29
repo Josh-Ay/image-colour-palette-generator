@@ -1,4 +1,5 @@
 import {customErrorDiv, customResultsDiv} from "./custom.js";
+import { checkImageFile } from "./validator.js";
 
 const uploadFile = document.getElementById("upload-img");
 const imgPreviewContainer = document.querySelector(".loaded-image-preview-container");
@@ -8,6 +9,7 @@ const container = document.querySelector(".container-fluid");
 const detailsContainer = document.querySelector(".image-details-container");
 const loading = document.getElementById("loading");
 const uploadNewBtn = document.querySelector(".upload-new-link");
+const aboutContainer = document.querySelector(".about-container");
 
 
 // function to handle file/image drag over
@@ -21,22 +23,10 @@ window.dragLeave = (element) =>{
     element.classList.remove("drag-over");
 };
 
-// function to check if the filetype is an image
-const checkImageFile = (fileType) =>{
-    const imageExtensions = ["jpg", "jpeg", "png"]; // list of accepted image file types
-    let check = false;
-
-    imageExtensions.forEach((extension) => {    // check if the file type contains any of the accepted extensions in the imageExtensions
-        if (fileType.includes(extension)){
-            check = true;
-        }
-    });
-    return check;
-};
-
 // function to remove 'select file' display and send the uploaded image
 const removeFileDisplayAndSendImage = (fileAdded) =>{
     addContainer.remove();  // remove the file upload display
+    aboutContainer.remove();    // remove the about section
 
     let newImgSrc = URL.createObjectURL(fileAdded);     // create a new blob url
     imgPreview.src = newImgSrc;     // set the img src to the blob url
@@ -124,21 +114,21 @@ const sendLoadedImageToServer = async (imageFileToSend) => {
     newForm.append("file", imageFileToSend)     // appending the file uploaded by the user to the form created above
 
     // make asynchronous post request to server
-    const request = await fetch("/", {method: "POST", body: newForm})
-    .then((res) => {
-        if (res.status === 200){
-            const response = res.json();
+    try {
+        const request = await fetch("/", {method: "POST", body: newForm});
+        const response = await request.json();
 
-            response.then((results) => {
-                detailsContainer.style.display = "block";
-                customResultsDiv(results["results"], detailsContainer);    // create results div with the results gotten back
+        detailsContainer.style.display = "block";
+        customResultsDiv(response["results"], detailsContainer);    // create results div with the results gotten back
 
-                uploadNewBtn.style.display = "block";
-                hideLoadingAnimation();     // hide loading animation
-            })
-        }
-    }).catch(err => {
-        console.log(err);
-    });
+        uploadNewBtn.style.display = "block";
+        hideLoadingAnimation();     // hide loading animation
+
+    } catch (error) {
+        console.log(error);
+        customErrorDiv("Something went wrong while trying to extract your colors ⚠.", container);
+        
+        hideLoadingAnimation();
+    }
 
 };
