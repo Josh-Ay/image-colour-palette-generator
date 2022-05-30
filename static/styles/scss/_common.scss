@@ -6,6 +6,12 @@
     position: absolute;
 }
 
+.absolute-vert-center{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .blue-color{
     color: var(--blue) !important;
 }

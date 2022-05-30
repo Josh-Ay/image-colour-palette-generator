@@ -27,8 +27,12 @@
     </head>
 
     <div class="container-fluid">
+        {% if rel_position %}
+        <header class="rel-position">
+        {% else: %}
         <header>
-            <div class="header-wrapper rel-position">
+        {% endif %}
+            <div class="header-wrapper">
                 <h1 onclick="window.location.href='{{ url_for('home_blueprint.home') }}'" tabindex="0">Color Extractor</h1>
                 {% if current_user: %}
                     <div class="user-details text-white">

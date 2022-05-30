@@ -1,12 +1,43 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% include "header.html" %}
+{% with rel_position=True%}
+    {% include "header.html" %}
+{% endwith %}
 
 {% block content %}
 
 <div class="user-profile-page-container">
-    Colors here
+    <h1>Welcome 👋</h1>
+    <h2>Your Saved Colors</h2>
+    <div class="user-saved-colors-container">
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        <div class="saved-color" style="background: red;"></div>
+        
+    </div>
+    <h2>Recent Results</h2>
+    <div class="canvas-chart-container">
+        <canvas id="my-chart" width="400" height="400"></canvas>
+    </div>
+    
 </div>
+
+<!-- {% include "chart.html" %} -->
+
+{% include "footer.html" %}
 
 {% endblock %}
