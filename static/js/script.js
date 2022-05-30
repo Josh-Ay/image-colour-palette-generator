@@ -73,6 +73,8 @@ window.openFiles = () =>{
 
 // handle image/file load into div
 window.addEventListener("load", () => {
+    if (uploadFile == null) return;
+
     uploadFile.addEventListener("change", (e) => {
         if (e.target.files && e.target.files[0]) {
             const result = checkImageFile(e.target.files[0].type);
