@@ -8,12 +8,12 @@
         <figure>
             <img onclick="openFiles()" class="upload-icon" src="/static/assets/cloud-icon.svg" alt="cloud icon">
         </figure>
-        <h2 class="upload-image-text" onclick="openFiles()">Drag and drop to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
-        <h2 class="upload-image-text-small" onclick="openFiles()">Click to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png)</span><br><br>or</h2>
+        <h2 class="upload-image-text" onclick="openFiles()">Drag and drop to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png, .webp, .gif, .svg)</span><br><br>or</h2>
+        <h2 class="upload-image-text-small" onclick="openFiles()">Click to upload image<br><span class="extensions-allowed">(.jpeg, .jpg, .png, .webp, .gif, .svg)</span><br><br>or</h2>
         <label for="upload-img" class="btn browse-btn">
             Browse Files
         </label>
-        <input id="upload-img" class="absolute-position" type="file">
+        <input id="upload-img" class="absolute-position" type="file" accept="image/x-png,image/gif,image/jpeg,image/svg+xml,image/webp">
     </div>
 
     <div class="loaded-image-preview-container">
@@ -56,8 +56,9 @@
                 <br /><br />
                 <h3>Features</h3>
                 <p>Get the <span class="blue-color"><strong>most common colors</strong></span> in an image effectively creating a <span class="blue-color"> <strong>color palette</strong></span> for you!</p>
-                <img src="/static/assets/demos/solution_demo.gif" class="image-demos" alt="demo image of how this webapp extracts the colors from an uploaded image" />
+                <img src="/static/assets/demos/solution_demo.gif" class="image-demos" alt="demo of how this webapp extracts the colors from an uploaded image" />
                 <p><span class="blue-color"><strong>Copy</strong></span> the hex code from the results with a click!</p>
+                <img src="/static/assets/demos/demo-1.gif" class="image-demos" alt="demo of how you can copy the extracted color code with just a click" />
                 <p><span class="blue-color"><strong>Save</strong></span> your generated color palette!</p>
             </div>
         </div>
