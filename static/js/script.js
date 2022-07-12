@@ -1,5 +1,4 @@
 import {customErrorDiv, customResultsDiv} from "./custom.js";
-import { checkImageFile } from "./validator.js";
 
 const uploadFile = document.getElementById("upload-img");
 const imgPreviewContainer = document.querySelector(".loaded-image-preview-container");
@@ -48,26 +47,22 @@ window.drop = (element, e) =>{
     element.classList.remove("drag-over");
 
     if (e.dataTransfer.items){
-        if (e.dataTransfer.items[0].kind === "file"){   // accept only files
-            if (e.dataTransfer.items.length > 1){   // handle if more than one file was dropped
-                customErrorDiv("Please select only one file.", container);
-            }else{
-                const result = checkImageFile(e.dataTransfer.items[0].type);    // check if the filetype is one of the accepted filetypes('.jpg', '.jpeg', '.png')
-                if (result){
-                    removeFileDisplayAndSendImage(e.dataTransfer.items[0].getAsFile()); // load the image and send it for analysis
-                }else{
-                    customErrorDiv("Please select an image.", container)
-                };
-            };
-        }else{
-            customErrorDiv("Please upload a file.", container);
-        };
+        // accept only files
+        if (e.dataTransfer.items[0].kind !== "file") return customErrorDiv("Please upload a file.", container);
+        
+        // handle if more than one file was dropped
+        if (e.dataTransfer.items.length > 1) return customErrorDiv("Please select only one file.", container);
+
+        // load the image and send it for analysis
+        removeFileDisplayAndSendImage(e.dataTransfer.items[0].getAsFile());
+
     }
 };
 
 // function to open 'select-file' dialog
-window.openFiles = () =>{
-    uploadFile.click();     // opens up the 'select file' window
+window.openFiles = () => {
+    // opens up the 'select file' window
+    uploadFile.click();
 };
 
 
@@ -77,13 +72,10 @@ window.addEventListener("load", () => {
 
     uploadFile.addEventListener("change", (e) => {
         if (e.target.files && e.target.files[0]) {
-            const result = checkImageFile(e.target.files[0].type);
-
-            if (result){
-                removeFileDisplayAndSendImage(e.target.files[0]);
-            }else{
-                customErrorDiv("Please select an image.", container);
-            }
+            
+            // load the image and send it for analysis
+            removeFileDisplayAndSendImage(e.target.files[0]);
+            
         };
     });
 });
