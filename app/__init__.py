@@ -2,14 +2,14 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
+from pymongo import MongoClient
 from authlib.integrations.flask_client import OAuth
 
 load_dotenv()   # load the variables stored in the .env file
 
 
 # initialising a database and oauth object handlers
-db = SQLAlchemy()
+client = MongoClient('localhost', 27017)
 oauth = OAuth()
 
 # registering an oauth client for google
@@ -38,17 +38,12 @@ oauth.register(
     client_kwargs={'scope': 'user email'},
 )
 
+def get_db():
+    return client.colorsDB
+
 
 def configure_app(app):
-    db.init_app(app)
     oauth.init_app(app)
-
-
-def configure_database(app):
-
-    @app.before_first_request
-    def initialize_database():
-        db.create_all()
 
 
 def create_flask_app(config):
@@ -58,6 +53,5 @@ def create_flask_app(config):
 
     Bootstrap(app)
     configure_app(app)
-    # configure_database(app)
 
     return app
