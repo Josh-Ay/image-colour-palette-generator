@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, url_for, session, redirect
-from app import oauth
+from app import get_db, oauth
 from app.routes_blueprint.registered_clients import registered_clients
 from markupsafe import escape
 
@@ -35,7 +35,27 @@ def authorize(client):
     resp = oauth_client.get(registered_clients[escape(client)]["profile_key"], token=token)
     resp.raise_for_status()
     profile = resp.json()
+
+    db = get_db()
+    existing_user = db.users.find_one({ "profile_id": profile["id"]})
+
+    if existing_user is None:
+        # google
+        if client == list(registered_clients.keys())[0]:
+            db.users.insert_one({
+                "profile_id": profile["id"],
+                "profile_img": profile["picture"],
+                "display_name": profile["name"],
+            })
+        # github
+        else:
+            db.users.insert_one({
+                "profile_id": profile["id"],
+                "profile_img": profile["avatar_url"],
+                "display_name": profile["login"],
+            })
+
     session["user_profile"] = profile
     session.permanent = True
 
-    return redirect(url_for("users_blueprint.get_user_profile", user_id=profile["id"]))
+    return redirect(url_for("users_blueprint.user_profile"))
