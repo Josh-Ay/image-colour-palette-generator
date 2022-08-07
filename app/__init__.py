@@ -9,7 +9,7 @@ load_dotenv()   # load the variables stored in the .env file
 
 
 # initialising a database and oauth object handlers
-client = MongoClient('localhost', 27017)
+client = MongoClient(os.environ.get("MONGO_DB_URI"))
 oauth = OAuth()
 
 # registering an oauth client for google
