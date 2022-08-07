@@ -10,14 +10,14 @@ class Config(object):
 
     TESTING = False
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProductionConfig(Config):
     """Class that defines the configuration settings to be used in production"""
-    SQLALCHEMY_DATABASE_URI = os.environ.get("POSTGRE_DATABASE_URL")
+    pass
+
 
 
 class DevelopmentConfig(Config):
     """Class that defines the configuration settings to be used in development"""
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.basedir + "\\color-extractor-users.db")
+    pass

@@ -1,5 +1,5 @@
 from app import create_flask_app
-from app.flask_app_config import DevelopmentConfig
+from app.flask_app_config import DevelopmentConfig, ProductionConfig
 from app.routes_blueprint.users_blueprint import users_blueprint
 from app.routes_blueprint.home_blueprint import home_blueprint
 from app.routes_blueprint.authentication_blueprints import authentication_blueprint
@@ -7,7 +7,7 @@ from app.error_handlers.error_routes import handle_page_not_found, handle_unauth
 from app.robots_text_handler.robots_text_handler import robots_text_blueprint
 
 # creating a new flask application
-app = create_flask_app(DevelopmentConfig())
+app = create_flask_app(ProductionConfig())
 
 # registering blueprints/views for the flask application
 app.register_blueprint(home_blueprint, url_prefix="/")
