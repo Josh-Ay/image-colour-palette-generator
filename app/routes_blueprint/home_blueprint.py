@@ -1,5 +1,4 @@
-from cgi import test
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, session
 from PIL import Image
 import numpy as np
 from rgb_to_hex_converter import convert_to_hex
@@ -8,13 +7,25 @@ import os
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPM
 from arrayChunker import chunk_array
+from app import get_db
 
 home_blueprint = Blueprint("home_blueprint", __name__, static_folder="../../static", template_folder="../../templates")
 
 
 @home_blueprint.route("/")
 def home():
-    return render_template("index.html")
+    user_profile = None
+
+    try:
+        current_user = session["user_profile"]
+    except KeyError:
+        user_profile = None
+        session.clear()
+    else:
+        db = get_db()
+        user_profile = db.users.find_one({ "profile_id": current_user["id"]})
+    
+    return render_template("index.html", current_user=user_profile)
 
 
 @home_blueprint.route("/", methods=["POST"])

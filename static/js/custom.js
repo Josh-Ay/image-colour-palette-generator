@@ -1,4 +1,5 @@
 const container = document.querySelector(".container-fluid");
+const userColorDivs = document.querySelectorAll(".user-saved-colors-container .saved-color");
 
 const customErrorDiv = (message, containerElement) =>{
     // create a new div and add a class to style it
@@ -27,8 +28,9 @@ const customErrorDiv = (message, containerElement) =>{
     errorDiv.appendChild(errorParagraph);
     errorDiv.appendChild(okBtn);
 
-    // insert the div into the document
+    // insert the div into the document and scroll into view of the div
     document.body.insertBefore(errorDiv, containerElement);
+    errorDiv.scrollIntoView();
 
     // remove the div created from the document on click outside of the div
     window.addEventListener("click", function(e){
@@ -74,6 +76,29 @@ const customDiv = (message, backgroundColor, containerElement, textColor) =>{
     }, 1000);
 };
 
+const handleColorItemClick = (e, checkCurrentDiv) => {
+    
+    let colorToCopy;
+    let elemIsDiv = false;
+
+    if ( (checkCurrentDiv) && (e.target.nodeName === "DIV") ) elemIsDiv = true;
+
+    if ( (checkCurrentDiv) && elemIsDiv ) colorToCopy = e.target.children[0].innerText;
+
+    if ( (checkCurrentDiv) && !elemIsDiv ) colorToCopy = e.target.innerText;
+    
+    if (!checkCurrentDiv) colorToCopy = e.target.parentElement.children[1].innerText;
+
+    navigator.clipboard.writeText(colorToCopy);
+
+    // check if the 'colorToCopy' has more than 1f or 1e in its hex code(i.e a very light color) and if so set the color of text within to "black"
+    if ( ((colorToCopy.match(/f/g) || []).length) > 1 || ((colorToCopy.match(/e/g) || []).length) > 1 ){
+        customDiv(`Copied ${colorToCopy}`, colorToCopy, container, "#000");
+    }else{
+        customDiv(`Copied ${colorToCopy}`, colorToCopy, container);
+    }
+
+}
 
 const customResultsDiv = (resultList, containerElement) =>{
     let newFragment = document.createDocumentFragment();    // creating a document fragment
@@ -143,21 +168,15 @@ const customResultsDiv = (resultList, containerElement) =>{
             colorCodeHoverParagraph.style.display = "none";
         });
 
-        color.addEventListener("click", (e) => { // to copy the hex text on click
-            const colorToCopy = e.target.parentElement.children[1].innerText;
-
-            navigator.clipboard.writeText(colorToCopy);
-
-            // check if the 'colorToCopy' has more than 1f or 1e in its hex code(i.e a very light color) and if so set the color of text within to "black"
-            if ( ((colorToCopy.match(/f/g) || []).length) > 1 || ((colorToCopy.match(/e/g) || []).length) > 1 ){
-                customDiv(`Copied ${colorToCopy}`, colorToCopy, container, "#000");
-            }else{
-                customDiv(`Copied ${colorToCopy}`, colorToCopy, container);
-            }
-        });
+        color.addEventListener("click", handleColorItemClick);
     }
 
     containerElement.appendChild(newFragment);  // appending the document fragment to the 'containerElement' passed
 };
+
+userColorDivs.forEach(colorDiv => {
+    colorDiv.addEventListener("click", (e) => handleColorItemClick(e, true));
+})
+
 
 export {customErrorDiv, customResultsDiv};

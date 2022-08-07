@@ -36,7 +36,13 @@
                 <h1 onclick="window.location.href='{{ url_for('home_blueprint.home') }}'" tabindex="0">Color Extractor</h1>
                 {% if current_user: %}
                     <div class="user-details text-white">
-                        {{ current_user }}
+                        <img src="{{ current_user.profile_img }}" alt="current user" onclick="toggleUserProfileDiv()">
+                        <div class="user-details-container" id="user-profile-details-container">
+                            <ul>
+                                <a href="{{ url_for('users_blueprint.user_profile') }}"><li>{{ current_user.display_name }}- Profile</li></a>
+                                <a href="{{ url_for('users_blueprint.handle_logout') }}"><li>Logout</li></a>
+                            </ul>
+                        </div>
                     </div>
                 {% else: %}
                     <div class="user-actions-container">

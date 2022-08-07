@@ -7,8 +7,10 @@ const addContainer = document.querySelector(".add-image-container");
 const container = document.querySelector(".container-fluid");
 const detailsContainer = document.querySelector(".image-details-container");
 const loading = document.getElementById("loading");
+const loadingText = document.getElementById("loading-text");
 const uploadNewBtn = document.querySelector(".upload-new-link");
 const aboutContainer = document.querySelector(".about-container");
+const resultHiddenInput = document.getElementById("upload-result-input")
 
 
 // function to handle file/image drag over
@@ -84,6 +86,7 @@ window.addEventListener("load", () => {
 const showLoadingAnimation = () =>{
     loading.style.display = "block";
     loading.classList.add("display");
+    loadingText.style.display = "block";
 
     let distanceFromTop = loading.offsetTop;
 
@@ -98,6 +101,7 @@ const showLoadingAnimation = () =>{
 const hideLoadingAnimation = () =>{
     loading.style.display = "none";
     loading.classList.remove("display");
+    loadingText.style.display = "none";
 }
 
 
@@ -115,7 +119,8 @@ const sendLoadedImageToServer = async (imageFileToSend) => {
         detailsContainer.style.display = "block";
         customResultsDiv(response["results"], detailsContainer);    // create results div with the results gotten back
 
-        uploadNewBtn.style.display = "block";
+        uploadNewBtn.style.display = "flex";
+        resultHiddenInput.value = JSON.stringify(response["results"]);
         hideLoadingAnimation();     // hide loading animation
 
     } catch (error) {

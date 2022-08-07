@@ -37,9 +37,16 @@
     </div>
 
     <div id="loading"></div>
+    <div id="loading-text" style="display: none; position: relative; top: -8rem; text-align: center;">This will only take a minute</div>
 
     <div class="upload-new-link">
         <a href="{{ url_for('home_blueprint.home') }}" class="btn new-upload-btn" aria-label="Upload a new image">Upload New</a>
+        {% if current_user: %}
+            <form action="{{ url_for('users_blueprint.user_profile') }}" method="post">
+                <input type="hidden" id="upload-result-input" name="upload-result">
+                <button class="btn save-result-btn" type="submit">Save</button>
+            </form>
+        {% endif %}
     </div>
 
     <div class="about-container">
@@ -60,6 +67,7 @@
                 <p><span class="blue-color"><strong>Copy</strong></span> the hex code from the results with a click!</p>
                 <img src="/static/assets/demos/demo-1.gif" class="image-demos" alt="demo of how you can copy the extracted color code with just a click" />
                 <p><span class="blue-color"><strong>Save</strong></span> your generated color palette!</p>
+                <img src="/static/assets/demos/demo-2.gif" class="image-demos" alt="demo of how you can save your results to view later" />
             </div>
         </div>
     </div>

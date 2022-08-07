@@ -13,6 +13,7 @@ header{
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         h1{
             font-size: 3.6rem;
@@ -35,6 +36,55 @@ header{
             align-items: center;
         }
 
+        .user-details{
+            position: relative;
+            img{
+                display: block;
+                border-radius: 50%;
+                max-width: 100%;
+                width: 4rem;
+                height: 4rem;
+                cursor: pointer;
+            }
+            .user-details-container{
+                position: absolute;
+                top: 120%;
+                right: 0;
+                animation: fadeIn 0.55s ease-in-out;
+                display: none;
+                ul{
+                    background-color: #fff;
+                    color: #000;
+                    list-style: none;
+                    border-radius: 10px;
+                    padding: 10%;
+                    width: 20rem;
+                    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+                    a{
+                        text-decoration: none;
+                        color: #000;
+
+                        li{
+                            display: block;
+                            padding: 6% 7%;
+                            word-wrap: normal;
+                            transition: 0.35s ease-in-out;
+                            border-radius: 10px;
+                            cursor: pointer;
+    
+                            &:not(:last-child){
+                                margin-bottom: 6%;
+                            }
+    
+                            &:hover, &:focus{
+                                background-color: rgba(0, 0, 0, 0.25);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         .user-actions-container a{
             &:first-child{
                 margin-right: 20%;
@@ -45,7 +95,7 @@ header{
 
 @media (max-width: 991px){
     header{
-        padding: 3% 8%;
+        padding: 2%;
 
         .header-wrapper{
             h1{
@@ -67,4 +117,16 @@ header{
         padding: 3%;
         padding-left: 5%;
     } 
+    header .header-wrapper .user-details .user-details-container ul {
+        width: 16rem;
+        padding: 7%;
+    }
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }to {
+        opacity: 1;
+    }
 }

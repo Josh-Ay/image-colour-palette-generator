@@ -1,42 +1,86 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% with rel_position=True%}
+{% with rel_position=True, current_user=current_user %}
     {% include "header.html" %}
 {% endwith %}
 
 {% block content %}
 
 <div class="user-profile-page-container">
-    <h1>Welcome 👋</h1>
-    <h2>Your Saved Colors</h2>
-    <div class="user-saved-colors-container">
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        <div class="saved-color" style="background: red;"></div>
-        
+    
+    <a href="{{ url_for('users_blueprint.user_profile') }}" id="go-back-btn" class="btn new-upload-btn" aria-label="go back to your profile">Go Back</a>
+    
+    <div class="user-saved-colors-container" id="all-user-colors-container">
+        {% for color in all_colors: %}
+            <div class="saved-color" style="background: {{ color['code'] }}">
+                {% if color["light_color"]: %}
+                    <span class="color-name light">{{ color["code"] }}</span>
+                {% else: %}
+                    <span class="color-name">{{ color["code"] }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
+
+    <h3 id="all-results-title">All results</h3>
+    <div id="view-results-container" class="view-results-container">
+        <div class="canvas-chart-container">
+            <canvas id="my-chart-2" width="400" height="400"></canvas>
+        </div>
+        <div class="results-container">
+            <h4 style="text-align: center;">Go back in time to see your past results</h4>
+            <div class="results">
+                {% for result in all_results: %}
+                    <p onclick="updateChartDisplay({{ result }})">{{ result["created"] }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% for messages in get_flashed_messages(): %}
+        <p class="success-message"> {{ messages }} </p>
+    {% endfor %}
+
+    <h1 class="welcome-text">
+        <span>Welcome back, {{ current_user.display_name }} 👋</span> 
+        <a href="{{ url_for('home_blueprint.home') }}" class="btn new-upload-btn" aria-label="Upload a new image">Analyze New</a>
+    </h1>
+
+    <h2>Recently Saved Colors</h2>
+    {% if recent_colors|length > 1 %}
+    <div class="user-saved-colors-container">
+        
+        {% for recent_color in recent_colors: %}
+            <div class="saved-color" style="background: {{ recent_color['code'] }}">
+                {% if recent_color["light_color"]: %}
+                    <span class="color-name light">{{ recent_color["code"] }}</span>
+                {% else: %}
+                    <span class="color-name">{{ recent_color["code"] }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <span class="empty-text-content">Your saved colors will appear here</span>
+    {% endif %}
+
+    {% if recent_colors|length > 1 %}
+    <a href="#" class="btn new-upload-btn" aria-label="view all saved colors" onclick="handleViewMoreBtnClick()">View more</a>
+    {% endif %}
+
     <h2>Recent Results</h2>
+    {% if recent_colors|length > 1 %}
+    <div id="data-for-chart" data-chart="{{ all_results }}"></div>
     <div class="canvas-chart-container">
         <canvas id="my-chart" width="400" height="400"></canvas>
     </div>
     
+    <a href="#" class="btn new-upload-btn" aria-label="view all results" onclick="handleViewResultsBtnClick()">View more</a>
+    {% else: %}
+    <span class="empty-text-content">Your recent results will appear here</span>
+    {% endif %}
 </div>
-
-<!-- {% include "chart.html" %} -->
 
 {% include "footer.html" %}
 

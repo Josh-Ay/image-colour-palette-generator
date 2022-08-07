@@ -3,17 +3,24 @@
     width: 70%;
     display: none;
     margin: 0 auto 5%;
+    align-items: center;
+    justify-content: flex-start;
 
     a.new-upload-btn{
         color: var(--black);
         background: var(--grey);
         width: max-content;
-        margin-right: auto;
+        margin-right: 4%;
 
         &:hover, &:focus{
             color: var(--white);
             background: var(--blue);
         }
+    }
+
+    .save-result-btn {
+        background: var(--blue);
+        color: var(--white);
     }
 }
 
@@ -21,7 +28,7 @@
 
     .container-fluid .upload-new-link{
         width: 96%;
-        margin: 10% auto;
+        margin: 11% auto;
     }
 
 }

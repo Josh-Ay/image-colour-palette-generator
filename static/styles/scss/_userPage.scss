@@ -1,17 +1,55 @@
 .user-profile-page-container{
     padding: 1% 7%;
+    animation: fadeIn 0.5s ease-in-out;
 
     h1{
         font-size: 3rem;
     }
+
+    &.all-colors-active {
+        margin-top: 7%;
+    }
+
+    .success-message {
+        padding: 1%;
+        background-color: var(--light-green-color);
+        color: var(--deep-green-color);
+        border-radius: 10px;
+        width: max-content;
+        margin: 1.5% 0 3%;
+    }
+
+    a.new-upload-btn {
+        border: 1px solid;
+        border-color: var(--blue);
+        color: var(--blue);
+
+        &:hover, &:focus {
+            background-color: var(--blue);
+            color: var(--white);
+        }
+    }
+
+    .welcome-text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5%;
+    }
+
+    .empty-text-content{
+        margin-bottom: 6%;
+        display: block;
+    }
+
     h2{
         font-size: 2rem;
     }
 
     .user-saved-colors-container{
         width: 100%;
-        height: 10rem;
-        margin: 3% 0 5%;
+        height: 12rem;
+        margin-top: 3%;
         position: relative;
         overflow-x: scroll;
         overflow-y: hidden;
@@ -22,27 +60,220 @@
 
         .saved-color{
             width: 10rem;
-            height: 100%;
+            height: 90%;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0px 0px 10px var(--box-shadow-color);
+            box-shadow: 0 0 4px 4px var(--box-shadow-color);
             display: inline-block;
             margin-right: 0.5%;
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            position: relative;
+
+            &:first-child {
+                margin-left: 0.2%;
+            }
 
             &:hover, &:focus{
-                filter: opacity(0.5);
+                filter: brightness(0.9);
                 transition: 0.35s ease-in-out;
             }
+
+            .color-name{
+                color: var(--white);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: 1px solid var(--white);
+                border-radius: 5px;
+                padding: 2% 4%;
+                background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.12)), to(transparent));
+                &.light{
+                    color: var(--black);
+                    border-color: var(--black);
+                    background: transparent;
+                }
+            }
+
         }
         
         &::-webkit-scrollbar{
             display: none;
         }
+
+        & ~ a.new-upload-btn{
+            display: block;
+            width: max-content;
+            margin: 2.5% 0 5%;
+            margin-left: auto;
+        }
+    }
+
+    #all-user-colors-container{
+        height: 100%;
+        display: none;
+        flex-wrap: wrap;
+        animation: fadeIn 1s ease-in-out;
+
+        .saved-color {
+            width: calc((100% / 5) - 0.5%);
+            height: 16rem;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    #go-back-btn {
+        display: none;
+        width: max-content;
+    }
+
+    #data-for-chart{
+        display: none;
     }
 
     .canvas-chart-container{
-        display: inline-block;
-        width: 24rem;
-        max-width: 25rem;
+        display: block;
+        width: 40%;
+        max-width: 40%;
+        margin: 3% auto 0;
+    }
+
+    #all-results-title{
+        display: none;
+    }
+
+    #view-results-container {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2%;
+        animation: fadeIn 1s ease-in-out;
+
+        & > * {
+            width: 50%;
+        }
+
+        .results {
+            max-height: 30rem;
+            overflow-y: auto;
+            p{
+                
+                transition: 0.2s ease-in-out;
+                padding: 1%;
+                border-radius: 5px;
+                margin: 2% 0;
+                cursor: pointer;
+                text-align: center;
+
+
+                &:hover, &:focus {
+                    background-color: var(--blue);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        
+        padding-left: 0;
+        padding-right: 0;
+
+        .canvas-chart-container {
+            max-width: 70%;
+            width: 70%;
+        }
+        
+        &.all-colors-active {
+            margin-top: 15%;
+        }
+
+        #all-results-title {
+            margin-top: 5%;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        padding-left: 0;
+        padding-right: 0;
+
+        &.all-colors-active {
+            margin-top: 22%;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .success-message {
+            padding: 4%;
+            margin-top: 6%;
+        }
+        .welcome-text {
+            align-items: flex-start;
+            flex-direction: column;
+
+            a.new-upload-btn {
+                margin: 5% 0;
+            }    
+        }
+
+        .empty-text-content{
+            margin-bottom: 14%;
+            display: block;
+        }
+
+        .user-saved-colors-container {
+            margin-bottom: 10%;
+        }
+
+        .canvas-chart-container{
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        #all-user-colors-container{
+    
+            .saved-color {
+                width: calc((100% / 3) - 2.5%);
+                height: 12rem;
+                margin-right: 2.5%;
+                margin-top: 2%;
+                margin-bottom: 2%;
+            }
+        } 
+        
+        #view-results-container {
+            flex-direction: column;
+
+            & > * {
+                width: 100%;
+            }
+
+            h4 {
+                margin-top: 10%;
+            }
+
+            .results {
+                max-height: 20rem;
+            }
+        }
+    }
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
     }
 }

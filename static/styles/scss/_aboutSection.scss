@@ -26,7 +26,7 @@
         margin: 130% auto 20%;
 
         .card{
-            width: 85%;
+            width: 95%;
         }
     }
 
@@ -40,16 +40,24 @@
 
 @media (max-width: 576px){
     .about-container{
-        margin: 195% auto 40%;
+        margin: 195% auto 10%;
 
         .card{
-            width: 95%;
+            width: 100%;
+            padding-left: 2%;
+            padding-right: 2%;
+
+            .card-header {
+                .card-title {
+                    margin-bottom: 7%;
+                }
+            }
         }
     }
 }
 
 @media(max-width: 435px){
     .about-container{
-        margin: 275% auto 70%;
+        margin: 275% auto 10%;
     }
 }
