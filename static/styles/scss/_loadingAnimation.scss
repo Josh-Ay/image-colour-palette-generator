@@ -15,6 +15,21 @@
     }
 }
 
+#loading-text{
+    display: none; 
+    position: relative; 
+    top: -8rem; 
+    text-align: center;
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        top: -4rem;
+    }
+    
+    @media screen and (max-width: 767px) {
+        top: -1rem;
+    }
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

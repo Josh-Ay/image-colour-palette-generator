@@ -517,6 +517,25 @@ header .header-wrapper .user-actions-container a:first-child {
   visibility: visible;
 }
 
+#loading-text {
+  display: none;
+  position: relative;
+  top: -8rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #loading-text {
+    top: -4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #loading-text {
+    top: -1rem;
+  }
+}
+
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
