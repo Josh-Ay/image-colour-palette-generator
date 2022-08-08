@@ -120,7 +120,7 @@ const sendLoadedImageToServer = async (imageFileToSend) => {
         customResultsDiv(response["results"], detailsContainer);    // create results div with the results gotten back
 
         uploadNewBtn.style.display = "flex";
-        resultHiddenInput.value = JSON.stringify(response["results"]);
+        if (resultHiddenInput !== null) resultHiddenInput.value = JSON.stringify(response["results"]);
         hideLoadingAnimation();     // hide loading animation
 
     } catch (error) {
