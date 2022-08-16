@@ -4,13 +4,16 @@ import os
 from flask_bootstrap import Bootstrap
 from pymongo import MongoClient
 from authlib.integrations.flask_client import OAuth
+from flask_compress import Compress
 
-load_dotenv()   # load the variables stored in the .env file
-
+load_dotenv()  # load the variables stored in the .env file
 
 # initialising a database and oauth object handlers
 client = MongoClient(os.environ.get("MONGO_DB_URI"))
 oauth = OAuth()
+
+# initialising a gzip compression object
+compress = Compress()
 
 # registering an oauth client for google
 oauth.register(
@@ -38,12 +41,14 @@ oauth.register(
     client_kwargs={'scope': 'user email'},
 )
 
+
 def get_db():
     return client.colorsDB
 
 
 def configure_app(app):
     oauth.init_app(app)
+    compress.init_app(app)
 
 
 def create_flask_app(config):
