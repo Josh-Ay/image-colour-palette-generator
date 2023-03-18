@@ -9,7 +9,7 @@ from flask_compress import Compress
 load_dotenv()  # load the variables stored in the .env file
 
 # initialising a database and oauth object handlers
-client = MongoClient(os.environ.get("MONGO_DB_URI"))
+client = MongoClient(os.environ.get("MONGO_DB_URI"), connect=False)
 oauth = OAuth()
 
 # initialising a gzip compression object
