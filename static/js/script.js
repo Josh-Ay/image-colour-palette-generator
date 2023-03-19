@@ -126,7 +126,9 @@ const sendLoadedImageToServer = async (imageFileToSend) => {
     } catch (error) {
         console.log(error);
         customErrorDiv("Something went wrong while trying to extract your colors ⚠.", container);
-        
+        uploadNewBtn.style.display = "flex";
+        uploadNewBtn.style.marginTop = "4%";
+
         hideLoadingAnimation();
     }
 
